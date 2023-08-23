@@ -5,6 +5,6 @@ import 'package:flutter/material.dart';
 // }
 
 Widget customIconImage() {
-  return Image.asset("assets/icons/icon.png");
+  return Image.asset("assets/icons/icon-extra-small.png");
 }
 

@@ -14,7 +14,7 @@ Widget customBorderContainer({
     width: width,
     height: height,
     margin: EdgeInsets.all(padding??20),
-    padding: EdgeInsets.all(padding??20),
+    padding: EdgeInsets.all(padding??4),
     decoration: BoxDecoration(
       border: Border.all(
         width: 1,

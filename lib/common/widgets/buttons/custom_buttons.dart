@@ -13,14 +13,15 @@ Widget customButton({
   double? borderRadius,
 }) {
   return Padding(
-    padding: padding?? const EdgeInsets.all(0),
+    padding: padding ?? const EdgeInsets.all(0),
     child: ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(backgroundColor ?? null),
-        minimumSize: MaterialStatePropertyAll(Size(width ?? 50, height ?? 50)),
-        shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius??8)))
-      ),
+          backgroundColor: MaterialStatePropertyAll(backgroundColor ?? null),
+          minimumSize:
+              MaterialStatePropertyAll(Size(width ?? 50, height ?? 50)),
+          shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 8)))),
       child: Text(
         style: TextStyle(color: textColor ?? null),
         buttonText,
@@ -36,17 +37,25 @@ Widget customGreenButton({
   Color? textColor,
   double? width,
   double? height,
+  EdgeInsetsGeometry? padding,
+  double? borderRadius,
 }) {
-  return ElevatedButton(
-    onPressed: onPressed,
-    style: ButtonStyle(
-      backgroundColor:
-          MaterialStatePropertyAll(backgroundColor ?? customGreenColor),
-      minimumSize: MaterialStatePropertyAll(Size(width ?? 50, height ?? 60)),
-    ),
-    child: customText(
-      text: buttonText,
-      color: textColor,
+  return Padding(
+    padding: padding ?? const EdgeInsets.all(0),
+    child: ElevatedButton(
+      onPressed: onPressed,
+      style: ButtonStyle(
+          backgroundColor:
+              MaterialStatePropertyAll(backgroundColor ?? customGreenColor),
+          minimumSize: MaterialStatePropertyAll(
+            Size(width ?? 50, height ?? 60),
+          ),
+          shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 8)))),
+      child: customText(
+        text: buttonText,
+        color: textColor,
+      ),
     ),
   );
 }
