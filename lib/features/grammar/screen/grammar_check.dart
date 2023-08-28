@@ -27,7 +27,9 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
   Future getCorrectedString(String inputText) async {
     String textAfterURL = inputText.replaceAll(" ", "%20");
 
+    // api link
     String url = 'http://127.0.0.1:5000/api/$textAfterURL';
+    
     try {
       var response = await http.get(
         Uri.parse(url),
