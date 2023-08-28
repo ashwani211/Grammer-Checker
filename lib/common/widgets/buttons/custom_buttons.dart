@@ -17,13 +17,13 @@ Widget customButton({
     child: ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(backgroundColor ?? null),
+          backgroundColor: MaterialStatePropertyAll(backgroundColor),
           minimumSize:
               MaterialStatePropertyAll(Size(width ?? 50, height ?? 50)),
           shape: MaterialStatePropertyAll(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius ?? 8)))),
       child: Text(
-        style: TextStyle(color: textColor ?? null),
+        style: TextStyle(color: textColor),
         buttonText,
       ),
     ),

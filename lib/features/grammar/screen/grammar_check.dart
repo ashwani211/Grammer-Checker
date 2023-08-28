@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grammarlyclone/common/config/colors.dart';
 import 'package:grammarlyclone/common/widgets/buttons/custom_buttons.dart';
 import 'package:grammarlyclone/common/widgets/containers/border_containers.dart';
 import 'package:grammarlyclone/common/widgets/images/custom_images.dart';
 import 'package:grammarlyclone/common/widgets/texts/custom_text_style.dart';
+import 'package:grammarlyclone/features/grammar/api_test.dart';
 
 class GrammarCheckerScreen extends StatefulWidget {
   const GrammarCheckerScreen({super.key});
@@ -22,7 +24,6 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     inputFocus = FocusNode();
@@ -71,7 +72,7 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
             IconButton(
               iconSize: 24,
               onPressed: () {},
-              icon: Icon(Icons.info),
+              icon: const Icon(Icons.info),
               color: customGreyColor,
             ),
           ],
@@ -103,7 +104,10 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
                           child: IconButton(
                             iconSize: 16,
                             icon: const Icon(Icons.cancel_outlined),
-                            onPressed: () {},
+                            onPressed: () {
+                              inputTextController!.clear();
+                              outputTextController!.clear();
+                            },
                           )),
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, right: 16,),
@@ -125,7 +129,10 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 buttonText: "Check",
-                onPressed: () {},
+                onPressed: () async {
+                  // checkResponse("Testor the programming");
+                  outputTextController!.text = await newResponse(inputTextController!.text);
+                },
               ),
               Expanded(
                 child: customBorderContainer(
@@ -137,7 +144,9 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
                           child: IconButton(
                             iconSize: 16,
                             icon: const Icon(Icons.copy),
-                            onPressed: () {},
+                            onPressed: () async {
+                              await Clipboard.setData(ClipboardData(text: outputTextController!.text));
+                            },
                           )),
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, right: 16,),

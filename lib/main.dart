@@ -48,7 +48,7 @@ class Page1 extends StatelessWidget {
             // ),
             onPressed: () {
               Get.rawSnackbar(
-                duration: Duration(seconds: 2),
+                duration: const Duration(seconds: 2),
                 // messageText: Text("Testing"),
                 messageText: const Text(
                   'PLEASE CONNECT TO THE INTERNET',
