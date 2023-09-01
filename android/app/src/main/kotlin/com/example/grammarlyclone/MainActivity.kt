@@ -1,4 +1,4 @@
-package com.example.grammarlyclone
+package com.example.grammarchecker
 
 import io.flutter.embedding.android.FlutterActivity
 

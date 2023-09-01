@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grammarlyclone/common/config/colors.dart';
-import 'package:grammarlyclone/common/widgets/texts/custom_text_style.dart';
+import 'package:grammarchecker/common/config/colors.dart';
+import 'package:grammarchecker/common/widgets/texts/custom_text_style.dart';
 
 Widget customButton({
   required String buttonText,

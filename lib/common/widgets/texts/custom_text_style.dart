@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grammarlyclone/common/config/colors.dart';
+import 'package:grammarchecker/common/config/colors.dart';
 
 Widget customHeadingText({
   required String text,

@@ -1,13 +1,15 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:grammarlyclone/common/config/colors.dart';
-import 'package:grammarlyclone/common/util/dialog/alert_dialog.dart';
-import 'package:grammarlyclone/common/widgets/buttons/custom_buttons.dart';
-import 'package:grammarlyclone/common/widgets/containers/border_containers.dart';
-import 'package:grammarlyclone/common/widgets/images/custom_images.dart';
-import 'package:grammarlyclone/common/widgets/texts/custom_text_style.dart';
+import 'package:get/get.dart';
+import 'package:grammarchecker/common/config/colors.dart';
+import 'package:grammarchecker/common/util/dialog/alert_dialog.dart';
+import 'package:grammarchecker/common/widgets/buttons/custom_buttons.dart';
+import 'package:grammarchecker/common/widgets/containers/border_containers.dart';
+import 'package:grammarchecker/common/widgets/images/custom_images.dart';
+import 'package:grammarchecker/common/widgets/texts/custom_text_style.dart';
 import 'package:http/http.dart' as http;
 
 class GrammarCheckerScreen extends StatefulWidget {
@@ -24,12 +26,16 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
   TextEditingController? inputTextController;
   TextEditingController? outputTextController;
 
+  bool isThemeDark = false;
+
+  // api link
+  String apiUrl = 'http://127.0.0.1:5000/api/';
+
   Future getCorrectedString(String inputText) async {
     String textAfterURL = inputText.replaceAll(" ", "%20");
 
-    // api link
-    String url = 'http://127.0.0.1:5000/api/$textAfterURL';
-    
+    String url = apiUrl + textAfterURL;
+
     try {
       var response = await http.get(
         Uri.parse(url),
@@ -41,11 +47,12 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
     }
   }
 
-  void showInfo(){
-    simpleAlertDialog(context, "Grammer Checker", "Say goodbye to grammatical uncertainties and hello to eloquence, as our app employs advanced algorithms to ensure your words shine with clarity.");
+  void showInfo() {
+    simpleAlertDialog(context, "Grammer Checker",
+        "Say goodbye to grammatical uncertainties and hello to eloquence, as our app employs advanced algorithms to ensure your words shine with clarity.");
   }
 
-  void messageCopiedToClipboard(){
+  void messageCopiedToClipboard() {
     simpleAlertDialog(context, "Success", "Copied to Clipboard");
   }
 
@@ -75,7 +82,7 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: customWhiteColor,
+          backgroundColor: isThemeDark ? Colors.grey[850] : customWhiteColor,
           elevation: 1,
           leading: IconButton(
             iconSize: 24,
@@ -89,7 +96,7 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
           title: Text(
             "Grammar Checker",
             style: TextStyle(
-              color: customGreyColor,
+              color: isThemeDark ? customWhiteColor : customGreyColor,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -99,25 +106,48 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
               onPressed: () {
                 showInfo();
               },
-              icon: const Icon(Icons.info),
-              color: customGreyColor,
+              icon: Stack(
+                children: [
+                  Center(
+                    child: Container(
+                      height: 12,
+                      width: 12,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const Center(child: Icon(Icons.info)),
+                ],
+              ),
+              color: customGreenLight,
             ),
           ],
         ),
         body: Center(
           child: Column(
             children: [
-              const SizedBox(
-                height: 24,
+              const SizedBox(height: 12),
+              CupertinoSwitch(
+                value: isThemeDark,
+                activeColor: customGreenLight,
+                onChanged: (value) {
+                  Get.changeTheme(value ? ThemeData.dark() : ThemeData.light());
+                  setState(() {
+                    isThemeDark = value;
+                  });
+                },
               ),
+              const SizedBox(height: 12),
               customHeadingText(
-                color: customGreyColor,
+                color: isThemeDark ? customWhiteColor : customGreyColor,
                 text: "Free Grammar Checker",
               ),
               const SizedBox(
                 height: 16,
               ),
-              customText(text: "Ensure your English writing is mistake-free."),
+              customText(
+                color: isThemeDark ? customWhiteColor : customGreyColor,
+                text: "Ensure your English writing is mistake-free.",
+              ),
               const SizedBox(
                 height: 4,
               ),
@@ -144,8 +174,8 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
                         child: TextField(
                           controller: inputTextController!,
                           focusNode: inputFocus!,
-                          minLines: 10,
-                          maxLines: 10,
+                          minLines: 6,
+                          maxLines: 8,
                           decoration: const InputDecoration.collapsed(
                               hintText: "Start typing..."),
                           cursorColor: customGreenColor,
@@ -178,7 +208,7 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
                             onPressed: () async {
                               await Clipboard.setData(ClipboardData(
                                   text: outputTextController!.text));
-                              
+
                               messageCopiedToClipboard();
                             },
                           )),
@@ -190,8 +220,8 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
                         child: TextField(
                           controller: outputTextController!,
                           readOnly: true,
-                          minLines: 10,
-                          maxLines: 10,
+                          minLines: 6,
+                          maxLines: 8,
                           decoration: const InputDecoration.collapsed(
                               hintText: "Corrected text here..."),
                           cursorColor: customGreenColor,
