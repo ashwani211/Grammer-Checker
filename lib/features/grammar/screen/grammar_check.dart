@@ -29,12 +29,12 @@ class _GrammarCheckerScreenState extends State<GrammarCheckerScreen> {
   bool isThemeDark = false;
 
   // api link
-  String apiUrl = 'http://127.0.0.1:5000/api/';
+  String apiUrl = 'http://10.0.2.2:5000';
 
   Future getCorrectedString(String inputText) async {
     String textAfterURL = inputText.replaceAll(" ", "%20");
 
-    String url = apiUrl + textAfterURL;
+    String url = "$apiUrl/api/$textAfterURL";
 
     try {
       var response = await http.get(
