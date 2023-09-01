@@ -82,5 +82,5 @@ The ML model is currently trained on a small dataset and hence, prone to errors.
 
 ## Feedback
 
-If you have any feedback, please reach out to us at ashwanikumarsingh.varanasi@gmaii.com
+If you have any feedback, please reach out to us at ashwanikumarsingh.varanasi@gmail.com
 
