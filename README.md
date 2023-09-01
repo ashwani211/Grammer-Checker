@@ -38,7 +38,7 @@ Stablishing connection to the API:
   
   **\[Project]/lib/features/grammar/screen/grammar_check.dart** 
   
-  to the hosted API url string (for virtual machine use 10.0.2.2:[PORT]/api).
+  to the hosted API url string (for virtual machine use http://10.0.2.2:[PORT]).
 
 Running the Application:
 --|
