@@ -1,4 +1,4 @@
-# Grammar Corrector
+# Grammar Checker
 
 An application for correcting grammatical errors in a text.
 
