@@ -2,13 +2,6 @@
 
 An application for correcting grammatical errors in a text.
 
-
-
-https://github.com/ashwani211/Grammer-Checker/assets/48960517/1ec394f9-f53c-4ec0-ae09-216365232cea
-
-
-
-
 ## Features
 
 - Grammar Correction
